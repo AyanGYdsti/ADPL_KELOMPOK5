@@ -25,3 +25,6 @@ Route::get('/login', function () {
 Route::get('/pesan', function () {
     return view('pesan');
 });
+
+Route::get('/upload-produk', [ProductController::class, 'create'])->name('produk.create');
+Route::post('/upload-produk', [ProductController::class, 'store'])->name('produk.store');
