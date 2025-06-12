@@ -29,3 +29,4 @@ Route::get('/pesan', function () {
 Route::get('/upload-produk', [ProductController::class, 'create'])->name('produk.create');
 Route::post('/upload-produk', [ProductController::class, 'store'])->name('produk.store');
 
+Route::get('/upload-produk', [ProductController::class, 'create']);

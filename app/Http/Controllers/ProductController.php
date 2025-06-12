@@ -25,7 +25,7 @@ class ProductController extends Controller
         ]);
 
        $gambarPaths = [];
-       foreach ($request->file('gambar') as $file) {
+        foreach ($request->file('gambar') as $file) {
         $path = $file->store('produk', 'public');
         $gambarPaths[] = $path;
         }
