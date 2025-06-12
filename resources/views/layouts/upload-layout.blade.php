@@ -10,6 +10,7 @@
 
   <!-- CSS khusus upload produk -->
   <link rel="stylesheet" href="{{ asset('css/upload-produk.css') }}">
+  
 </head>
 <body>
   @yield('content')
