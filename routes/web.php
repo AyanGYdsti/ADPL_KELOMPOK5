@@ -32,3 +32,7 @@ Route::get('/upload-produk', [ProductController::class, 'create'])->name('produk
 Route::post('/upload-produk', [ProductController::class, 'store'])->name('produk.store');
 
 Route::get('/upload-produk', [ProductController::class, 'create']);
+
+Route::get('/pesananku', function () {
+    return view('pesananku');
+});
