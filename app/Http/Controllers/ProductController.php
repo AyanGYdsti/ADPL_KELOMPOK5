@@ -24,16 +24,21 @@ class ProductController extends Controller
             'gambar.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $gambarPaths = [];
-        if ($request->hasFile('gambar')) {
-            foreach ($request->file('gambar') as $file) {
-                $path = $file->store('produk', 'public');
-                $gambarPaths[] = $path;
-            }
+       $gambarPaths = [];
+       foreach ($request->file('gambar') as $file) {
+        $path = $file->store('produk', 'public');
+        $gambarPaths[] = $path;
         }
 
-        // Simpan ke DB jika model tersedia (contoh)
-        // Product::create([...]);
+         Product::create([
+        'nama'      => $request->nama,
+        'deskripsi' => $request->deskripsi,
+        'kategori'  => $request->kategori,
+        'jenis'     => $request->jenis,
+        'harga'     => $request->harga,
+        'lokasi'    => $request->lokasi,
+        'gambar'    => $gambarPaths
+    ]);
 
         return redirect()->route('produk.create')->with('success', 'Produk berhasil diunggah!');
     }
