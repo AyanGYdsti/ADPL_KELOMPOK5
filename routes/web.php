@@ -21,3 +21,7 @@ Route::get('/beranda', function () {
 Route::get('/login', function () {
     return view('auth.login');
 });
+
+Route::get('/pesan', function () {
+    return view('pesan');
+});
