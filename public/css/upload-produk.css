@@ -1,11 +1,11 @@
-* {
+ * {
       box-sizing: border-box;
       font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
       margin: 0;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+       background: linear-gradient(135deg, #4a9b8e 0%, #6bb6a8 100%);
       min-height: 100vh;
       padding: 20px;
     }
@@ -246,7 +246,8 @@
 
     .form-section {
       padding: 100px 25px 30px 25px;
-      background: #b1d0c9;
+      background: linear-gradient(135deg, #d6f1ec 0%, #6bb6a8 100%);
+      min-height: 100vh;
     }
 
     .form-group {
@@ -304,7 +305,7 @@
     }
 
     .edit-btn {
-      background: #397d7d;
+      background: linear-gradient(135deg, #4a9b8e 0%, #397d7d 100%);
       color: white;
       border: none;
       border-radius: 8px;
@@ -323,7 +324,7 @@
 
     .confirm-btn {
       width: 100%;
-      background: linear-gradient(135deg, #397d7d 0%, #77b3a3 100%);
+      background: linear-gradient(135deg, #4a9b8e 0%, #397d7d 100%);
       color: white;
       border: none;
       border-radius: 15px;
