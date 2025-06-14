@@ -1,4 +1,4 @@
-@extends('layouts.orderlayout')
+@extends('layouts.jelajah')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/pesananku.css') }}">

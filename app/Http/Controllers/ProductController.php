@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,22 +25,35 @@ class ProductController extends Controller
             'gambar.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-       $gambarPaths = [];
+        $gambarPaths = [];
         foreach ($request->file('gambar') as $file) {
-        $path = $file->store('produk', 'public');
-        $gambarPaths[] = $path;
+            $path = $file->store('produk', 'public');
+            $gambarPaths[] = $path;
         }
 
-         Product::create([
-        'nama'      => $request->nama,
-        'deskripsi' => $request->deskripsi,
-        'kategori'  => $request->kategori,
-        'jenis'     => $request->jenis,
-        'harga'     => $request->harga,
-        'lokasi'    => $request->lokasi,
-        'gambar'    => $gambarPaths
-    ]);
+        Product::create([
+            'nama'      => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'kategori'  => $request->kategori,
+            'jenis'     => $request->jenis,
+            'harga'     => $request->harga,
+            'lokasi'    => $request->lokasi,
+            'gambar'    => $gambarPaths
+        ]);
 
         return redirect()->route('produk.create')->with('success', 'Produk berhasil diunggah!');
+    }
+
+    public function getProducts(Request $request)
+    {
+        $kategori = $request->query('kategori');
+
+        if ($kategori) {
+            $products = Product::where('kategori', $kategori)->get();
+        } else {
+            $products = Product::all();
+        }
+
+        return response()->json($products);
     }
 }

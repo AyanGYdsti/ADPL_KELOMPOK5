@@ -1,4 +1,4 @@
-@extends('layouts.pesan-layout')
+@extends('layouts.jelajah')
 
 @section('title', 'Detail Tas Sekolah')
 

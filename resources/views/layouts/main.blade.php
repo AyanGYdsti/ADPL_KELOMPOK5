@@ -14,9 +14,7 @@
     <nav class="navbar">
         <div class="logo">Reuse & Share</div>
         <div class="nav-links">
-            <a href="#jelajahi">Jelajahi</a>
-            <a href="#unggah">Unggah</a>
-            <a href="#" onclick="openModal('loginModal')">Login/Daftar</a>
+            <a href="/login" class="btn btn-primary" style="color: white">Login</a>
         </div>
     </nav>
 

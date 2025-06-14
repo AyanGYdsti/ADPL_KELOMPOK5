@@ -4,20 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
 
-// Halaman welcome di /
+// Halaman beranda di /beranda
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    return view('beranda');
+})->name('beranda');
 
 // Halaman home di /home
 Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-// Halaman beranda di /beranda
-Route::get('/beranda', function () {
-    return view('beranda');
-})->name('beranda');
 
 // Halaman login di /login
 Route::get('/login', function () {
@@ -30,6 +26,8 @@ Route::get('/pesan', function () {
 
 Route::get('/upload-produk', [ProductController::class, 'create'])->name('produk.create');
 Route::post('/upload-produk', [ProductController::class, 'store'])->name('produk.store');
+
+Route::get('/products', [ProductController::class, 'getProducts']);
 
 Route::get('/upload-produk', [ProductController::class, 'create']);
 
