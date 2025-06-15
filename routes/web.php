@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PesananController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\ProfileController;
 
 // Halaman beranda di /beranda
 Route::get('/', function () {
@@ -11,26 +12,23 @@ Route::get('/', function () {
 })->name('beranda');
 
 // Halaman home di /home
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', [PesananController::class, 'index']);
+Route::get('/pesan/detail/{id}', [PesananController::class, 'pesanDetail']);
 
 
 // Halaman login di /login
 Route::get('/login', [AuthController::class, 'index']);
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
+
 Route::post('/register', [AuthController::class, 'authRegister']);
 Route::post('/login', [AuthController::class, 'authLogin']);
 Route::get('/logout', [AuthController::class, 'logout']);
-
-
-Route::get('/pesan', function () {
-    return view('pesan');
-});
 
 Route::get('/upload-produk', [ProductController::class, 'create'])->name('produk.create');
 Route::post('/upload-produk', [ProductController::class, 'store'])->name('produk.store');
 
 Route::get('/products', [ProductController::class, 'getProducts']);
+Route::post('/products/report/{id}', [ProductController::class, 'report']);
 
 Route::get('/upload-produk', [ProductController::class, 'create']);
 
