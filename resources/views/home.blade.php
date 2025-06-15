@@ -304,3 +304,105 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .category-filters {
+                justify-content: center;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Berbagi Barang<br>Secara Komunitas</h1>
+                <p>Mari berbagi bersama</p>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Cari barang yang Anda butuhkan..." id="searchInput">
+                    <button class="search-btn" onclick="searchProducts()">🔍</button>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <div class="person" style="background: rgba(255,182,193,0.3);"></div>
+                <div class="person" style="background: rgba(135,206,235,0.3);"></div>
+                <div class="person" style="background: rgba(255,218,185,0.3);"></div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="filters">
+            <div class="filter-title">Filter</div>
+            <div class="category-filters">
+                <button class="category-btn active" onclick="filterCategory('semua')">Semua</button>
+                <button class="category-btn" onclick="filterCategory('tas')">Tas</button>
+                <button class="category-btn" onclick="filterCategory('elektronik')">Elektronik</button>
+                <button class="category-btn" onclick="filterCategory('pakaian')">Pakaian</button>
+                <button class="category-btn" onclick="filterCategory('furniture')">Furniture</button>
+                <button class="category-btn" onclick="filterCategory('buku')">Buku</button>
+                <button class="category-btn" onclick="filterCategory('mainan')">Mainan</button>
+                <button class="category-btn" onclick="filterCategory('olahraga')">Olahraga</button>
+                <button class="category-btn" onclick="filterCategory('kendaraan')">Kendaraan</button>
+                <button class="category-btn" onclick="filterCategory('lainnya')">Lainnya</button>
+            </div>
+            <div class="sort-filters">
+                <button class="sort-btn active" onclick="sortBy('newest')" title="Terbaru">📅</button>
+                <button class="sort-btn" onclick="sortBy('popular')" title="Populer">⭐</button>
+                <button class="sort-btn" onclick="sortBy('nearby')" title="Terdekat">📍</button>
+                <button class="sort-btn" onclick="sortBy('condition')" title="Kondisi">✨</button>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be loaded here -->
+        </div>
+    </main>
+
+    <script>
+        const products = [
+            { id: 1, title: 'Blazer Wanita', location: 'Jakarta Selatan', category: 'pakaian', condition: 'Baik', image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400', popular: false, message: 'Blazer wanita elegant, cocok untuk acara formal. Bahan berkualitas dan masih sangat layak pakai.' },
+            { id: 2, title: 'Tas Ransel Vintage', location: 'Bandung', category: 'tas', condition: 'Sangat Baik', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400', popular: true, message: 'Tas ransel vintage dengan desain klasik. Kapasitas besar dan tali masih kuat untuk aktivitas sehari-hari.' },
+            { id: 3, title: 'Laptop Gaming', location: 'Surabaya', category: 'elektronik', condition: 'Baik', image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400', popular: true, message: 'Laptop gaming performa tinggi, masih bisa main game berat. RAM 16GB, SSD 512GB. Siap pakai!' },
+            { id: 4, title: 'Sepeda Gunung', location: 'Yogyakarta', category: 'olahraga', condition: 'Sangat Baik', image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400', popular: false, message: 'Sepeda gunung 21 speed, frame aluminium ringan. Cocok untuk adventure dan olahraga sehari-hari.' },
+            { id: 5, title: 'Meja Kerja Kayu', location: 'Jakarta Utara', category: 'furniture', condition: 'Baik', image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400', popular: false, message: 'Meja kerja solid wood, ukuran 120x60cm. Perfect untuk WFH atau belajar. Masih kokoh dan stabil.' },
+            { id: 6, title: 'Kamera DSLR', location: 'Makassar', category: 'elektronik', condition: 'Sangat Baik', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400', popular: true, message: 'Kamera DSLR Canon EOS dengan lensa kit. Hasil foto jernih, cocok untuk belajar fotografi profesional.' },
+            { id: 7, title: 'Novel Koleksi', location: 'Medan', category: 'buku', condition: 'Baik', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', popular: false, message: 'Koleksi novel best seller dan klasik. Kondisi halaman masih bagus, cocok untuk pecinta buku.' },
+            { id: 8, title: 'Mobil Avanza', location: 'Jakarta Barat', category: 'kendaraan', condition: 'Baik', image: 'https://images.unsplash.com/photo-1494976688153-ca3ce29cd7a6?w=400', popular: true, message: 'Toyota Avanza 2018, terawat dan siap pakai. Mesin halus, AC dingin, perfect untuk keluarga kecil.' },
+            { id: 9, title: 'Kursi Gaming', location: 'Semarang', category: 'furniture', condition: 'Sangat Baik', image: 'https://images.unsplash.com/photo-1541558869434-2840d308329a?w=400', popular: false, message: 'Gaming chair ergonomis dengan lumbar support. Nyaman untuk duduk lama, bahan leather berkualitas.' },
+            { id: 10, title: 'Drone Camera', location: 'Bali', category: 'elektronik', condition: 'Baik', image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=400', popular: true, message: 'Drone dengan 4K camera dan gimbal stabilizer. Battery life bagus, cocok untuk aerial photography.' },
+            { id: 11, title: 'Jaket Denim', location: 'Malang', category: 'pakaian', condition: 'Baik', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400', popular: false, message: 'Jaket denim vintage style, bahan tebal dan hangat. Warna masih bagus, cocok untuk gaya kasual.' },
+            { id: 12, title: 'Mainan Lego', location: 'Bogor', category: 'mainan', condition: 'Sangat Baik', image: 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=400', popular: false, message: 'Set Lego lengkap dengan manual, semua pieces masih ada. Edukatif dan seru untuk anak-anak.' }
+        ];
+
+        let currentCategory = 'semua';
+        let currentSort = 'newest';
+
+        function renderProducts(productsToRender = products) {
+            const grid = document.getElementById('productsGrid');
+            
+            if (productsToRender.length === 0) {
+                grid.innerHTML = '<div class="no-products">Produk tidak ditemukan.</div>';
+                return;
+            }
+
+            grid.innerHTML = productsToRender.map(product => `
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('${product.image}')"></div>
+                    <div class="product-info">
+                        <div class="product-title">${product.title}</div>
+                        <div class="product-location">📍 ${product.location}</div>
+                        <span class="product-condition">${product.condition}</span>
+                        <div class="product-message">${product.message}</div>
+                        <button class="order-btn" onclick="orderProduct(${product.id})">Pesan Sekarang</button>
+                    </div>
+                </div>
+            `).join('');
+        }
