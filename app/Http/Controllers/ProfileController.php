@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Product; // Pastikan nama modelnya sesuai, Product atau Produk
 
-class ProfileController extends Controller
+class ProfilController extends Controller
 {
     public function index()
     {
-        // Ambil user yang sedang login
-        $user = Auth::user();
-
-        // Ambil produk milik user tersebut
-        $product = Product::where('user_id', $user->id);
-
-        // Kirim ke view
+        $user = User::find(Auth::user()->id);
+        $product = Product::where('user_id', Auth::user()->id);
         return view('profile', compact('user', 'product'));
     }
 }
