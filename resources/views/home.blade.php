@@ -514,3 +514,23 @@
                 window.location.href = `http://127.0.0.1:8000/pesan/detail/${id}`;
             }
         }
+
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            alert(`Melihat detail: ${product.title}\nLokasi: ${product.location}\nKondisi: ${product.condition}`);
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+
+        // Initial render
+        renderProducts();
+    </script>
+</body>
+</html>
+
+@endsection
