@@ -1,4 +1,4 @@
- function showPage(pageType) {
+function showPage(pageType) {
             // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
@@ -45,4 +45,3 @@
                 rightSide.style.transform = 'translateX(0)';
             }, 300);
         });
-   

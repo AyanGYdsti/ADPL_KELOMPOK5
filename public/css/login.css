@@ -120,7 +120,7 @@
 
         /* Right Side Styling */
         .right-side {
-            width: 450px;
+            width: 50%;
             min-height: 100vh;
             background: white;
             display: flex;

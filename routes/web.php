@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
@@ -16,9 +17,11 @@ Route::get('/home', function () {
 
 
 // Halaman login di /login
-Route::get('/login', function () {
-    return view('auth.login');
-});
+Route::get('/login', [AuthController::class, 'index']);
+Route::post('/register', [AuthController::class, 'authRegister']);
+Route::post('/login', [AuthController::class, 'authLogin']);
+Route::get('/logout', [AuthController::class, 'logout']);
+
 
 Route::get('/pesan', function () {
     return view('pesan');
