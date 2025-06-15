@@ -16,7 +16,7 @@
 
         <div class="header-content">
             <div class="header-text">
-                <h1>Pesana ku</h1>
+                <h1>Pesanan ku</h1>
             </div>
         </div>
 
