@@ -102,3 +102,103 @@
             font-size: 1rem;
             outline: none;
         }
+
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #10b981;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hero-illustration {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .person {
+            width: 60px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px 30px 10px 10px;
+            position: relative;
+        }
+
+        .person::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .filters {
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .sort-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .sort-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid #d1d5db;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .sort-btn:hover, .sort-btn.active {
+            background: #374151;
+            color: white;
+        }
