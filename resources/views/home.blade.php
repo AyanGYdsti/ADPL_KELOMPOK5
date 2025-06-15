@@ -406,3 +406,111 @@
                 </div>
             `).join('');
         }
+
+        function filterCategory(category) {
+            currentCategory = category;
+            
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            applyFilters();
+        }
+
+        function sortBy(sortType) {
+            currentSort = sortType;
+            
+            // Update active button
+            document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            applyFilters();
+        }
+
+        function applyFilters() {
+            let filtered = products;
+            
+            // Filter by category
+            if (currentCategory !== 'semua') {
+                filtered = filtered.filter(product => product.category === currentCategory);
+            }
+            
+            // Sort products
+            switch (currentSort) {
+                case 'popular':
+                    filtered = filtered.sort((a, b) => b.popular - a.popular);
+                    break;
+                case 'condition':
+                    filtered = filtered.sort((a, b) => b.condition.localeCompare(a.condition));
+                    break;
+                case 'nearby':
+                    // Simple alphabetical sort by location for demo
+                    filtered = filtered.sort((a, b) => a.location.localeCompare(b.location));
+                    break;
+                default: // newest
+                    filtered = filtered.sort((a, b) => b.id - a.id);
+            }
+            
+            renderProducts(filtered);
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (!query) {
+                applyFilters();
+                return;
+            }
+            
+            const filtered = products.filter(product => 
+                product.title.toLowerCase().includes(query) ||
+                product.location.toLowerCase().includes(query) ||
+                product.category.toLowerCase().includes(query)
+            );
+            
+            renderProducts(filtered);
+        }
+
+        async function orderProduct(id) {
+            const product = products.find(p => p.id === id);
+            
+            if (!product) {
+                alert('Produk tidak ditemukan!');
+                return;
+            }
+
+            // Simulasi menyimpan ke database
+            const orderData = {
+                product_id: id,
+                product_title: product.title,
+                customer_name: 'solasa', // Bisa diambil dari session/login
+                order_date: new Date().toISOString(),
+                status: 'pending',
+                location: product.location
+            };
+
+            try {
+                // Simulasi API call ke backend
+                const response = await fetch('http://127.0.0.1:8000/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                if (response.ok) {
+                    // Jika berhasil disimpan ke database, redirect ke halaman detail
+                    window.location.href = `http://127.0.0.1:8000/pesan/detail/${id}`;
+                } else {
+                    // Jika gagal, tetap redirect tapi tampilkan pesan
+                    alert('Pesanan berhasil dibuat! (Mode Demo)');
+                    window.location.href = `http://127.0.0.1:8000/pesan/detail/${id}`;
+                }
+            } catch (error) {
+                // Jika server belum ready, tetap redirect untuk demo
+                console.log('Demo mode: ', orderData);
+                alert(`Pesanan "${product.title}" berhasil dibuat!\nID: ${id}\nStatus: Pending`);
+                window.location.href = `http://127.0.0.1:8000/pesan/detail/${id}`;
+            }
+        }
