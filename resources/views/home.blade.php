@@ -3,75 +3,102 @@
 @section('title', 'Home')
 
 @section('content')
-    <header class="header">
-        <div class="logo">Reuse & share</div>
-        <div class="toggle-switch" onclick="toggleTheme()"></div>
-    </header>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <section class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Berbagi Barang<br>Secara Komunitas</h1>
-                <div class="hero-tag">Mari berbagi bersama</div>
-            </div>
-            <div class="hero-illustration">
-                <div class="person-char person1"></div>
-                <div class="person-char person2"></div>
-                <div class="person-char person3"></div>
-            </div>
-        </div>
-    </section>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reuse & Share - Berbagi Barang Secara Komunitas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <section class="search-section">
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Cari barang yang Anda butuhkan...">
-            <button class="search-btn">🔍</button>
-        </div>
-        <div class="filter-pills">
-            <div class="filter-pill active" data-category="Semua">Semua</div>
-            <div class="filter-pill" data-category="Tas">Tas</div>
-            <div class="filter-pill" data-category="Elektronik">Elektronik</div>
-            <div class="filter-pill" data-category="Pakaian">Pakaian</div>
-            <div class="filter-pill" data-category="Furniture">Furniture</div>
-            <div class="filter-pill" data-category="Buku">Buku</div>
-            <div class="filter-pill" data-category="Mainan">Mainan</div>
-            <div class="filter-pill" data-category="Olahraga">Olahraga</div>
-            <div class="filter-pill" data-category="Kendaraan">Kendaraan</div>
-            <div class="filter-pill" data-category="Lainnya">Lainnya</div>
-        </div>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
 
-    </section>
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    <div class="main-content">
-        <div class="products-grid" id="productsGrid">
-            <!-- Produk akan dimuat via JS -->
-        </div>
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
 
-        <div class="sidebar">
-            <h3 style="margin-bottom: 1rem; color: #2c3e50;">📍 Lokasi</h3>
-            <div class="map-container">
-                <div class="map-pin pin1"></div>
-                <div class="map-pin pin2"></div>
-                <div class="map-pin pin3"></div>
-                <div class="map-pin pin4"></div>
-            </div>
-            <div class="location-list">
-                <div class="location-item">
-                    <div class="location-dot dot-blue"></div>
-                    <span>Jakarta Selatan</span>
-                </div>
-                <div class="location-item">
-                    <div class="location-dot dot-pink"></div>
-                    <span>Bandung</span>
-                </div>
-                <div class="location-item">
-                    <div class="location-dot dot-green"></div>
-                    <span>Surabaya</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-@endsection
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #10b981, #059669);
+            padding: 3rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
