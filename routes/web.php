@@ -11,10 +11,7 @@ Route::get('/', function () {
     return view('beranda');
 })->name('beranda');
 
-Route::get('/edit', function () {
-    return view('edit');
-})->name('edit');
-// Halaman home di /home
+
 Route::get('/home', [PesananController::class, 'index']);
 Route::get('/pesan/detail/{id}', [PesananController::class, 'pesanDetail']);
 
