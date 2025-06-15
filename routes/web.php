@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('beranda');
 })->name('beranda');
 
-// Halaman home di /home
+
 Route::get('/home', [PesananController::class, 'index']);
 Route::get('/pesan/detail/{id}', [PesananController::class, 'pesanDetail']);
 
