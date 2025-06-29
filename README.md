@@ -1,1 +1,0 @@
-# ADPL_KELOMPOK5
